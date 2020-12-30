@@ -1,6 +1,6 @@
 ---
 title: "Getting Started"
-date: "`r Sys.Date()`"
+date: "2020-12-29"
 output:
   html_document: 
     theme: spacelab
@@ -9,12 +9,7 @@ output:
     keep_md: yes
 ---
 
-```{r setup, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+
 
 ## Background  
 
@@ -58,25 +53,33 @@ Double click to open R (not RStudio) and find the carrot `>`. This is where comm
 ## Arithmetic  
 
 You can use R as a calculator; just enter the expression and press return.  Experiment by evaluating the following expression.
-```{r arithmetic-ex-1}
+
+```r
 4*12
+#> [1] 48
 ```
 
 Order of operations applies and you don't need to add an '=' sign.
-```{r arithmetic-ex-2}
+
+```r
 (4*12)/2
+#> [1] 24
 ```
 
 Statistics are what R was originally written for and there are thousands of packages for specialized statistics depending on your needs.
-```{r arithmetic-ex-3}
+
+```r
 mean(4, 6, 8, 5, 6, 7, 7, 7)
+#> [1] 4
 ```
 
 ## Practice  
 
 1. Test out the arithmetic capabilities of R; experiment by doing addition, subtraction, multiplication, and division.  
-```{r practice-1}
+
+```r
 8/2+3*5
+#> [1] 19
 ```
 
 ## R and RStudio  
@@ -90,15 +93,19 @@ When you first open RStudio, you should see your screen divided into four quadra
 Before you begin any project in RStudio, it is important that you are in the correct "working directory". This is the folder on your computer where you are currently working; it is the location where RStudio will save all of your work. At first, most of the problems people encounter are because they are not in the correct working directory.  
 
 Run the following code by clicking the small green arrow to check your current working directory.  
-```{r get-working-directory}
+
+```r
 getwd()
+#> [1] "D:/TA files/Winter2021 BIS15L/BIS15W2021_mjhu/lab1"
 ```
 
 If you are not in the **lab 1 folder**, please navigate to it: Session>Set Working Directory>Choose Directory>Desktop>lab1.  
 
 Re-run the code below to confirm.
-```{r get-working-directory-2}
+
+```r
 getwd()
+#> [1] "D:/TA files/Winter2021 BIS15L/BIS15W2021_mjhu/lab1"
 ```
 
 ## GitHub  
