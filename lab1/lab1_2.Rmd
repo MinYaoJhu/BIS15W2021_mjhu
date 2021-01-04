@@ -74,10 +74,12 @@ Have a look at the format of this document; titles are indicated by a `#`. Large
 ## Links
 I often add links to my RMarkdown files. For a website, include the page name in `[]` and the website address in `()`. [BIS 15L Webpage](https://jmledford3115.github.io/datascibiol/).    
 
-Email is similar, but you need to include `mailto:` in the parentheses. Here is my email: [Joel Ledford](jmledford@ucdavis.edu).    
+Email is similar, but you need to include `mailto:` in the parentheses. Here is my email: [Joel Ledford](mailto:jmledford@ucdavis.edu).    
 
 ## Code Chunks
 All R code is inserted between two gray bars called a code chunk. You can insert a new code chunk by clicking "Insert>R" at the top of the page. On a Mac, the shortcut is `option+command+i`.  
+On a PC, the shortcut is `Ctrl+Alt+i`
+
 
 ## Knit
 In order to make the html file, you need to "Knit" the file. Knitting just means build the file. If you click "Knit" now, it will knit the lab.  
