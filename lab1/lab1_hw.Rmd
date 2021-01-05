@@ -1,11 +1,11 @@
 ---
 title: "Lab 1 Homework"
-author: "Please Add Your Name Here"
+author: "Min-Yao Jhu"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
-    toc: no
+    keep_md: yes
 ---
 
 ## Instructions
@@ -15,7 +15,13 @@ Make sure to use the formatting conventions of RMarkdown to make your report nea
 
 **1. Please complete the [class survey](https://forms.gle/AHHXd3aobaAdkkFg9) if you have not already done so.**
 
-**2. What is the difference between R and RStudio? What is GitHub and why is it useful to programmers?**  
+**2. What is the difference between R and RStudio? What is GitHub and why is it useful to programmers?**
+
+> R is a programming language used for statistical computing. In R, you can write a program and run the code independently of any other computer program.
+
+> RStudio uses the R language to develop statistical programs. RStudio however, must be used alongside R in order to properly function. Often referred to as an IDE, or integrated development environment, RStudio allows users to develop and edit programs in R by supporting a large number of statistical packages, higher quality graphics, and the ability to manage your workspace.
+
+> GitHub is a file storage and management site used by programmers. Programmers upload code to repositories (folders) and make it publicly available. 
 
 **3. Navigate to my [BIS15L](https://github.com/jmledford3115/BIS15LW2021_jledford) repository on GitHub. Notice that near the bottom there is a nice, clean description of the repository. You want this on your repository! It is built by making edits to the `README.md` file using the RMarkdown conventions. Edit your repository's `README.md` file so that you have a clean informative description, including your email address. Be creative! You don't need to just copy mine. There are lots of examples online.**  
 
