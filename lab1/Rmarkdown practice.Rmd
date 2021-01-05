@@ -1,0 +1,16 @@
+---
+title: "Rmarkdown practice"
+author: "Min-Yao"
+date: "2021/1/5"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# practice math
+```{r}
+2+2
+```
+
