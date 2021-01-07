@@ -5,6 +5,9 @@ Welcome! This Min-Yao's repository includes all of the .rmd files and data that 
 ## Contact Info
 
 [Min-Yao Jhu](mailto:minjhu@ucdavis.edu)  
+![](Image/2017_aspb.jpg)
+I am a sixth-year Ph.D. candidate in the Plant Biology Graduate Program at UC Davis.
+I have 3 years of experience teaching as a teaching assistant for several courses, including Plant Physiology (PLB111), Plant Growth and Development (PLB112), and Introduction to Biology: Biodiversity and the Tree of Life (BIS2C). I enjoyed the opportunity to put what I had learned in my courses and lab research into practice on teaching students.
 
 ## Class Links  
 
