@@ -1,6 +1,6 @@
 ---
 title: "Objects, Classes & NAs"
-date: "2021-01-06"
+date: "2021-01-07"
 output:
   html_document: 
     theme: spacelab
@@ -181,6 +181,24 @@ anyNA(my_missing)
 ```r
 new_vector <- c(7, 6.2, 5, 9, NA, 4, 9.8, 7, 3, 2)
 ```
+
+
+```r
+is.na(new_vector)
+```
+
+```
+##  [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE
+```
+
+```r
+anyNA(new_vector)
+```
+
+```
+## [1] TRUE
+```
+
 
 2. As we did in homework 1, calculate the mean of `new_vector`.
 

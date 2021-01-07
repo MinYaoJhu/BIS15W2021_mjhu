@@ -129,6 +129,14 @@ anyNA(my_missing)
 new_vector <- c(7, 6.2, 5, 9, NA, 4, 9.8, 7, 3, 2)
 ```
 
+```{r}
+is.na(new_vector)
+```
+```{r}
+anyNA(new_vector)
+```
+
+
 2. As we did in homework 1, calculate the mean of `new_vector`.
 ```{r}
 mean(new_vector)

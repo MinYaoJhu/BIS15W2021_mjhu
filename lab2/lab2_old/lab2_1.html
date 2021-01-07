@@ -10,7 +10,7 @@
 
 
 
-<meta name="date" content="2021-01-06" />
+<meta name="date" content="2021-01-07" />
 
 <title>Objects, Classes &amp; NAs</title>
 
@@ -1557,7 +1557,7 @@ div.tocify {
 
 
 <h1 class="title toc-ignore">Objects, Classes &amp; NAs</h1>
-<h4 class="date">2021-01-06</h4>
+<h4 class="date">2021-01-07</h4>
 
 </div>
 
@@ -1656,6 +1656,10 @@ my_complex &lt;- 2+4i</code></pre>
 <li>Let’s create a vector that includes some missing data (we will discuss vectors more in part 2). For now, run the following code chunk.</li>
 </ol>
 <pre class="r"><code>new_vector &lt;- c(7, 6.2, 5, 9, NA, 4, 9.8, 7, 3, 2)</code></pre>
+<pre class="r"><code>is.na(new_vector)</code></pre>
+<pre><code>##  [1] FALSE FALSE FALSE FALSE  TRUE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<pre class="r"><code>anyNA(new_vector)</code></pre>
+<pre><code>## [1] TRUE</code></pre>
 <ol start="2" style="list-style-type: decimal">
 <li>As we did in homework 1, calculate the mean of <code>new_vector</code>.</li>
 </ol>
