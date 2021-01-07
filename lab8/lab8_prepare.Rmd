@@ -1,0 +1,24 @@
+---
+title: "lab8"
+author: "Min-Yao"
+date: "2021/1/7"
+output: html_document
+---
+
+## Learning Goals
+
+##
+
+```{r}
+library(onemap)
+```
+
+```{r}
+?read_onemap
+```
+
+```{r}
+data()
+system.file(package="onemap")
+```
+
