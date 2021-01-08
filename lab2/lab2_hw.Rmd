@@ -81,6 +81,7 @@ springs_matrix2[2,3]
 
 ```{r}
 Jill_column <- springs_matrix2[,1]
+Jill_column
 mean(Jill_column)
 ```
 
