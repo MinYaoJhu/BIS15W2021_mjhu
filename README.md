@@ -5,6 +5,7 @@ Welcome! This Min-Yao's repository includes all of the .rmd files and data that 
 ## Contact Info
 
 [Min-Yao Jhu](mailto:minjhu@ucdavis.edu)  
+[LinkedIn](www.linkedin.com/in/min-yao-jhu)
 <img src="Image/2017_aspb.jpg" width="200">
 
 I am a sixth-year Ph.D. candidate in the Plant Biology Graduate Program at UC Davis.
