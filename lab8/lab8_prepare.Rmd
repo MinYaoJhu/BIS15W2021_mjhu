@@ -6,6 +6,8 @@ output: html_document
 ---
 
 ## Learning Goals
+*At the end of this exercise, you will be able to:* 
+
 
 ##
 
