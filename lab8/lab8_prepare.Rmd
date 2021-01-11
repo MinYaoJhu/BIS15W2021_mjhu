@@ -15,10 +15,75 @@ library(onemap)
 
 ```{r}
 ?read_onemap
+?onemap
+?onemap_example_f2
 ```
 
 ```{r}
 data()
 system.file(package="onemap")
+```
+### Importing data
+
+```{r}
+data(onemap_example_f2)
+onemap_example_f2
+```
+### Visualization of raw data
+
+```{r}
+plot(onemap_example_f2)
+```
+```{r}
+?plot.onemap
+```
+
+```{r}
+plot_by_segreg_type(onemap_example_f2)
+```
+### Segregation tests
+
+```{r}
+f2_test <- test_segregation(onemap_example_f2)
+class(f2_test)
+print(f2_test)
+```
+
+```{r}
+Bonferroni_alpha(f2_test)
+```
+
+```{r}
+plot(f2_test)
+```
+
+```{r}
+select_segreg(f2_test)
+```
+
+```{r}
+select_segreg(f2_test, distorted = TRUE)
+```
+
+### Estimating two-point recombination fractions
+
+```{r}
+twopts_f2 <- rf_2pts(onemap_example_f2)
+```
+
+```{r}
+(LOD_sug <- suggest_lod(onemap_example_f2))
+```
+
+```{r}
+print(twopts_f2, c("M12", "M42"))
+```
+
+```{r}
+class(twopts_f2)
+```
+
+```{r}
+print(twopts_f2)
 ```
 
