@@ -61,6 +61,19 @@ mean_vector <- rowMeans(springs_matrix)
 mean_vector
 ```
 
+```{r}
+Bluebell <- springs_matrix[1,]
+Bluebell
+mean(Bluebell)
+Opal <- springs_matrix[2,]
+Opal
+mean(Opal)
+```
+```{r}
+all_mean <- c(Bluebell,Opal)
+all_mean
+```
+
 
 7. Add this as a new column in the data matrix.  
 
