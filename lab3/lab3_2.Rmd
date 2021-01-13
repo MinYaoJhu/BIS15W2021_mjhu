@@ -39,6 +39,7 @@ An opinionated word about excel. It is fine to use excel for data entry and basi
 To import any file, first make sure that you are in the correct working directory. If you are not in the correct directory, R will not "see" the file.
 ```{r}
 getwd()
+#setwd("D:/TA files/Winter2021 BIS15L/BIS15W2021_mjhu/lab3")
 ```
 
 ## Load the data
@@ -47,6 +48,7 @@ Here we open a .csv file. Since we are using the tidyverse, we open the file usi
 In the previous part of the lab, you exported a `.csv` of hot springs data. Let's try to reload that `.csv`.  
 ```{r}
 hot_springs <- readr::read_csv("hsprings_data.csv")
+#package readr, use function read_csv (the same as read.csv)
 ```
 
 Use the `str()` function to get an idea of the data structure of `hot_springs`.  
@@ -58,6 +60,11 @@ What is the class of the scientist column? Change it to factor and then show the
 ```{r}
 class(hot_springs$scientist)
 ```
+```{r}
+levels(hot_springs$scientist)
+```
+
+
 
 ```{r}
 hot_springs$scientist <- as.factor(hot_springs$scientist)
