@@ -2,10 +2,11 @@
 title: "Transforming data 1: Dplyr `select()`"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
     toc: yes
     toc_float: yes
+    keep_md: yes
   pdf_document:
     toc: yes
 ---
@@ -37,6 +38,15 @@ Once data have been uploaded, let's get an idea of its structure, contents, and 
 glimpse(fish)
 ```
 
+```{r}
+str(fish)
+```
+
+```{r}
+summary(fish)
+```
+
+
 ## Tidyverse
 The [tidyverse](www.tidyverse.org) is an "opinionated" collection of packages that make workflow in R easier. The packages operate more intuitively than base R commands and share a common organizational philosophy.  
 ![*Data Science Workflow in the Tidyverse.*](tidy-1.png)  
@@ -52,7 +62,7 @@ names(fish)
 
 We are only interested in lakeid and scalelength.
 ```{r}
-select(fish, lakeid, scalelength)
+select(fish, "lakeid", "scalelength")
 ```
 
 To add a range of columns use `start_col:end_col`.
@@ -81,12 +91,28 @@ Options to select columns based on a specific criteria include:
 3. matches() = Select columns that match a regular expression  
 4. one_of() = Select columns names that are from a group of names  
 
+```{r}
+select(fish, ends_with("id"))
+```
+
+```{r}
+select(fish, contains("fish"))
+```
+
+
 We won't cover [regex](https://en.wikipedia.org/wiki/Regular_expression) in this class, but the following code is helpful when you know that a column contains a letter (in this case "a") followed by a subsequent string (in this case "er").  
 ```{r}
 select(fish, matches("a.+er"))
+#	The plus sign indicates one or more occurrences of the preceding element. For example, ab+c matches "abc", "abbc", "abbbc", and so on, but not "ac".
+# Matches any single character (many applications exclude newlines, and exactly which characters are considered newlines is flavor-, character-encoding-, and platform-specific, but it is safe to assume that the line feed character is included).
 ```
 
-You can also select columns based on the class of data.  
+You can also select columns based on the class of data. 
+```{r}
+str(fish)
+```
+
+
 ```{r}
 select_if(fish, is.numeric)
 ```
@@ -114,6 +140,15 @@ anyNA(mammals)
 mean(mammals$"max. life")
 ```
 
+```{r}
+x <- mammals[ 11]
+colMeans(x)
+```
+
+```{r}
+summary(mammals)
+```
+
 3. What are the names of the columns in the `mammals` data?
 ```{r}
 names(mammals)
@@ -121,28 +156,30 @@ names(mammals)
 
 4. Rename any columns that have capitol letters or punctuation issues.  
 ```{r}
-mammals <- rename(mammals, genus=Genus, wean_mass="wean mass", max_life="max. life", litter_size="litter size", litters_per_year="litters/year")
+mammals <- rename(mammals, genus=Genus, wean_mass="wean mass", max_life="max. life", litter_size="litter size", litters_year="litters/year")
 head(mammals)
 ```
 
 5. We are only interested in the variables `genus`, `species`, and `mass`. Use `select()` to build a new dataframe `mass` focused on these variables.
 ```{r}
-
+mass <- select(mammals, "genus", "species", "wean_mass")
+mass
 ```
 
 6. What if we only wanted to exclude `order` and `family`? Use the `-` operator to make the code efficient.
 ```{r}
-
+select(mammals, -order, -family)
 ```
 
 7. Select the columns that include "mass" as part of the name.  
 ```{r}
-
+select(mammals, contains("mass"))
 ```
 
 8. Select all of the columns that are of class `character`.  
 ```{r}
-
+select_if(mammals, ~is.character(.))
+#all variable
 ```
 
 ## Other
@@ -155,7 +192,8 @@ select_all(mammals, tolower)
 
 When naming columns, blank spaces are often added (don't do this, please). Here is a trick to remove these.  
 ```{r}
-select_all(mammals, ~str_replace(., " ", "_"))
+select_all(mammals, ~str_replace(., " ", "_" ))
+select_all(mammals, ~str_replace(., "[ ._/]", "" ))
 ```
 
 ## That's it! Take a break and I will see you on Zoom!  
