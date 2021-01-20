@@ -435,4 +435,6 @@ mammals %>%
 
 ## That's it! Take a break and I will see you on Zoom!  
 
+<span style="color:blue">some *blue* text</span>
+
 -->[Home](https://jmledford3115.github.io/datascibiol/)  

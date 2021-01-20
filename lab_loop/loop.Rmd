@@ -1,0 +1,110 @@
+---
+title: "loop"
+author: "Min-Yao"
+date: "2021/1/19"
+output: html_document
+---
+
+# A Tutorial on Loops in R
+
+What Are Loops?
+
+“Looping”, “cycling”, “iterating” or just replicating instructions is an old practice that originated well before the invention of computers. It is nothing more than automating a multi-step process by organizing sequences of actions or ‘batch’ processes and by grouping the parts that need to be repeated.
+
+
+## Different Types of Loops
+
+Depending on your specific programming situation, you may need different loop-structures that execute the code blocks within the loop on the basis of different conditions.
+
+The R programming language generally provides three different types of loops: for-loops, while-loops, and repeat-loops. 
+
+## For-Loops
+
+### Syntax of for loop
+
+```{r}
+#for (variable in vector) {
+#  do something
+#}
+```
+
+> Using the names above, each iteration of variable takes the value of one of the elements of vector. Here’s one example:
+
+#### example 0.
+
+```{r}
+for (i in 1:10) {
+  print(i^2)
+}
+```
+
+#### example 1. count the number of even numbers in a vector
+
+```{r}
+x <- c(1,2,5,3,10,9,8,11,6)
+count <- 0
+
+for (i in x) {
+  if(i %% 2 == 0)  
+    print(i)
+}
+```
+
+```{r}
+for (i in x) {
+  if(i %% 2 == 0)  
+    count = count+1
+}
+
+print(count)
+```
+```{r}
+random_number <- sample(1:1000, size = 100)
+random_number
+
+for (i in random_number) {
+  if(i %% 2 == 0)  
+    count = count+1
+}
+
+print(count)
+```
+
+```{r}
+
+```
+
+
+## While-Loops
+
+```{r}
+
+```
+
+
+## Repeat-Loops
+
+```{r}
+
+```
+
+```{r}
+library(tidyverse)
+```
+
+## Load the data
+For these exercises we will use the data from lab 4_1.  
+```{r}
+fish <- readr::read_csv("data/Gaeta_etal_CLC_data.csv")
+mammals <- readr::read_csv("data/mammal_lifehistories_v2.csv")
+```
+
+To keep things tidy, I am going to rename the variables in the mammals data.  
+```{r}
+mammals <- rename(mammals, genus=Genus, wean_mass="wean mass", max_life="max. life", litter_size="litter size", litters_per_year="litters/year")
+```
+
+```{r}
+str(mammals)
+str(fish)
+```

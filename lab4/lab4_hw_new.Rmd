@@ -143,10 +143,10 @@ deer <-
   homerange %>% 
   filter(family=="cervidae") %>% 
   select(family, genus, species, mean.mass.g, log10.mass) %>% 
-  arrange(desc(log10.mass))
+  arrange(desc(log10.mass)) %>% 
+  filter(log10.mass>=5.48746)
 deer
 ```
-
 
 **10. As measured by the data, which snake species has the smallest homerange? Show all of your work, please. Look this species up online and tell me about it!** **Snake is found in taxon column**    
 

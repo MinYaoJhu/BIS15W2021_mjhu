@@ -65,14 +65,17 @@ mammals %>%
 1. We are interested in the fish from the lakes "AL" and "AR" with a radii length between 2 and 4. Extract this information from the `fish` data. Use pipes!  
 ```{r}
 fish %>%
+  select(lakeid, radii_length_mm) %>% 
   filter(lakeid == "AL" | lakeid=="AR") %>%
-  filter(between(radii_length_mm, 2, 4))
+  filter(between(radii_length_mm, 2, 4)) %>% 
+  arrange(radii_length_mm)
 ```
 
 ## `arrange()`
 The `arrange()` command is a bit like a sort command in excel. Note that the default is ascending order.  
 ```{r}
 fish %>% 
+  select(lakeid, scalelength) %>% 
   arrange(scalelength)
 ```
 
@@ -133,7 +136,9 @@ mammals %>%
 ```{r}
 mammals %>% 
   select(genus, species, newborn) %>%
-  mutate(newborn_new = ifelse(newborn == -999.00, NA, newborn))
+  mutate(newborn_new = ifelse(newborn == -999.00, NA, newborn)) %>% 
+  arrange(newborn)
+
 ```
 
 ## Practice
@@ -153,5 +158,7 @@ mammals %>%
 ```
 
 ## That's it! Take a break and I will see you on Zoom!  
+
+<span style="color:blue">some *blue* text</span>
 
 -->[Home](https://jmledford3115.github.io/datascibiol/)  
