@@ -156,7 +156,7 @@ names(mammals)
 
 4. Rename any columns that have capitol letters or punctuation issues.  
 ```{r}
-mammals <- rename(mammals, genus=Genus, wean_mass="wean mass", max_life="max. life", litter_size="litter size", litters_year="litters/year")
+mammals <- rename(mammals, genus=Genus, wean_mass="wean mass", "max life"="max. life", litter_size="litter size", "litters/year"="litters/year")
 head(mammals)
 ```
 
@@ -192,8 +192,11 @@ select_all(mammals, tolower)
 
 When naming columns, blank spaces are often added (don't do this, please). Here is a trick to remove these.  
 ```{r}
-select_all(mammals, ~str_replace(., " ", "_" ))
-select_all(mammals, ~str_replace(., "[ ._/]", "" ))
+select_all(mammals, ~str_replace(., " ", "" ))
+```
+
+```{r}
+select_all(mammals, ~str_replace(., "[ _/]", "" ))
 ```
 
 ## That's it! Take a break and I will see you on Zoom!  

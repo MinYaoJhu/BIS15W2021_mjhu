@@ -5,6 +5,12 @@ date: "2021/1/19"
 output: html_document
 ---
 
+```{r message=FALSE, warning=FALSE}
+library("tidyverse")
+
+```
+
+
 # A Tutorial on Loops in R
 
 What Are Loops?
@@ -70,8 +76,59 @@ for (i in random_number) {
 print(count)
 ```
 
-```{r}
+### Let’s download some simulated satellite collar data
 
+```{r}
+#download.file("http://www.datacarpentry.org/semester-biology/data/locations.zip", "locations.zip")
+unzip("locations.zip")
+```
+
+```{r}
+list.files()
+```
+
+```{r}
+data_files <- list.files(pattern = "locations-2*", 
+                        full.names = TRUE)
+data_files
+str(data_files)
+```
+```{r}
+results <- vector(mode = "integer", length = length(data_files))
+results
+```
+
+```{r}
+for (i in 1:length(data_files)){
+  data <- read_csv(data_files[i])
+  count <- nrow(data)
+  results[i] <- count
+}
+results
+```
+
+https://datacarpentry.org/semester-biology/materials/for-loops-R/
+
+https://datacarpentry.org/semester-biology/exercises/Loops-multi-file-analysis-R/
+
+### Storing loop results in a data frame
+
+```{r}
+results <- data.frame(file_name = vector(mode = "character", length = length(data_files)),
+                      count = vector(mode = "integer", length = length(data_files)),
+                      long = vector(mode = "numeric", length = length(data_files)))
+results
+```
+
+```{r}
+for (i in 1:length(data_files)){
+  data <- read_csv(data_files[i])
+  count <- nrow(data)
+  results$file_name[i] <- data_files[i]
+  results$count[i] <- count
+  results$long[i] <- data$long
+}
+results
 ```
 
 
