@@ -46,7 +46,7 @@ head(msleep)
 
 We will also use the awesome [palmerpenguins](https://allisonhorst.github.io/palmerpenguins/articles/intro.html) data in the second part of lab so let's install it now.
 ```{r}
-#remotes::install_github("allisonhorst/palmerpenguins")
+remotes::install_github("allisonhorst/palmerpenguins")
 ```
 
 ## dplyr Practice

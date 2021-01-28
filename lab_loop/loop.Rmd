@@ -2,12 +2,13 @@
 title: "loop"
 author: "Min-Yao"
 date: "2021/1/19"
-output: html_document
+output: 
+  html_document: 
+    keep_md: yes
 ---
 
 ```{r message=FALSE, warning=FALSE}
 library("tidyverse")
-
 ```
 
 
@@ -15,7 +16,11 @@ library("tidyverse")
 
 What Are Loops?
 
-“Looping”, “cycling”, “iterating” or just replicating instructions is an old practice that originated well before the invention of computers. It is nothing more than automating a multi-step process by organizing sequences of actions or ‘batch’ processes and by grouping the parts that need to be repeated.
+A loop is a programming instruction that repeats until a specific condition is reached.
+
+The loop executes a code block again and again until no further action is required.
+
+Each time the code block within the loop is executed is called an iteration.
 
 
 ## Different Types of Loops
@@ -25,6 +30,8 @@ Depending on your specific programming situation, you may need different loop-st
 The R programming language generally provides three different types of loops: for-loops, while-loops, and repeat-loops. 
 
 ## For-Loops
+
+> for-loops specify a collection of objects (e.g. elements in a vector or list) to which a code block should be applied.
 
 ### Syntax of for loop
 
@@ -36,7 +43,7 @@ The R programming language generally provides three different types of loops: fo
 
 > Using the names above, each iteration of variable takes the value of one of the elements of vector. Here’s one example:
 
-#### example 0.
+#### example 0: Loop Through Vector in R (Basics)
 
 ```{r}
 for (i in 1:10) {
@@ -75,12 +82,74 @@ for (i in random_number) {
 
 print(count)
 ```
+### for-Loop Through Columns of Data Frame
 
-### Let’s download some simulated satellite collar data
+```{r}
+data <- data.frame(x1 = 1:5,    # Create example data
+                   x2 = 6:10,
+                   x3 = 11:15)
+data 
+```
+
+```{r}
+data1 <- data # Replicate example data
+
+for(i in 1:ncol(data1)) {       # for-loop over columns
+  data1[ , i] <- data1[ , i] + 10
+}
+data1
+```
+
+### for-Loop Over Rows of Data Frame
+
+```{r}
+data2 <- data                   # Replicate example data
+
+for(i in 1:nrow(data2)) {       # for-loop over rows
+  data2[i, ] <- data2[i, ] - 100
+}
+data2
+```
+
+### for-Loop Over Data Frame Columns
+
+```{r}
+data(iris)                                                 # Loading iris flower data set
+head(iris)                                                 # Inspecting iris flower data set
+```
+
+```{r}
+iris1 <- iris                                          # Replicate iris data set
+
+for(i in 1:ncol(iris1)) {                              # Head of for-loop
+ 
+  if(grepl("Width", colnames(iris1)[i])) {             # Logical condition
+ 
+    iris1[ , i] <- iris1[ , i] * 10              # Code block
+  }
+}
+
+head(iris1)
+```
+
+### Example 9: Creating Multiple Plots within for-Loop
+
+```{r}
+for(i in 1:(ncol(iris) - 1)) {                             # Head of for-loop
+ 
+  plot(1:nrow(iris), iris[ , i])                           # Code block
+  Sys.sleep(1)                                             # Pause code execution
+}
+```
+
+
+### Looping over files
+
+#### Let’s download some simulated satellite collar data
 
 ```{r}
 #download.file("http://www.datacarpentry.org/semester-biology/data/locations.zip", "locations.zip")
-unzip("locations.zip")
+#unzip("locations.zip")
 ```
 
 ```{r}
@@ -100,8 +169,8 @@ results
 
 ```{r}
 for (i in 1:length(data_files)){
-  data <- read_csv(data_files[i])
-  count <- nrow(data)
+  data0 <- read_csv(data_files[i])
+  count <- nrow(data0)
   results[i] <- count
 }
 results
@@ -122,28 +191,162 @@ results
 
 ```{r}
 for (i in 1:length(data_files)){
-  data <- read_csv(data_files[i])
-  count <- nrow(data)
+  data0 <- read_csv(data_files[i])
+  count <- nrow(data0)
   results$file_name[i] <- data_files[i]
   results$count[i] <- count
-  results$long[i] <- data$long
+  results$long[i] <- data0$long
+  results$lat[i] <- data0$lat
 }
 results
+```
+
+### loops practice: Multi-file Analysis
+
+1. You have a satellite collars on a number of different individuals and want to be able to quickly look at all of their recent movements at once. The data is posted daily to a url as a zip file that contains one csv file for each individual: http://www.datacarpentry.org/semester-biology/data/individual_collar_data.zip Start your solution by:
+
+* Downloading the zip file using download.file()
+* Unziping it using unzip()
+* Obtaining a list of all of the files with file names matching the pattern "collar-data-.*.txt"
+
+```{r}
+#download.file("http://www.datacarpentry.org/semester-biology/data/individual_collar_data.zip", "collar.zip")
+#unzip("collar.zip")
+```
+2. Use a loop to load each of these files into R and make a line plot (using geom_path()) for each file with long on the x axis and lat on the y axis. Graphs, like other types of output, won’t display inside a loop unless you explicitly display them, so you need put your ggplot() command inside a print() statement. Include the name of the file in the graph as the graph title using labs().
+
+```{r}
+
 ```
 
 
 ## While-Loops
 
+while-loops repeat a code block as long as a certain logical condition is TRUE.
+
+This code is typically used when we don’t know the exact number of times our R code needs to be executed.
+
+### example 0: Writing while-Loop in R (Basics)
+
 ```{r}
+x_while <- 0                  # Preliminary specification of data object
+
+while(x_while < 10) {         # Head of while-loop
+ 
+  x_while <- x_while + 1      # Body of while-loop
+  print(x_while)
+}
 
 ```
+### example 1: while-Loop Through Columns of Data Frame
+
+```{r}
+data3 <- data                   # Replicate example data
+
+i <- 1                          # Create running index
+
+while(i <= 2) {                  # Start while-loop
+  data3[ , i] <- data3[ , i] + 100
+  i <- i + 1
+}
+
+data3
+```
+
+### example 2: Running while-Loop Through Data Frame Columns
+
+```{r}
+data(iris)                                        # Loading exemplifying data set
+head(iris)                                        # Showing head of data in RStudio console
+iris2 <- iris                   # Replicate example data
+```
+
+```{r}
+running_index <- 1                                       # Create index
+
+while(is.numeric(iris2[ , running_index])) {              # Start of while-loop
+ 
+  iris2[ , running_index] <- iris2[ , running_index] * 10  # Code block
+  running_index <- running_index + 1
+ 
+}
+
+head(iris2)                                               # Showing head of updated data
+```
+
 
 
 ## Repeat-Loops
 
-```{r}
+repeat-loops repeat a code block until a break condition is fulfilled. This break condition marks the end of the loop.
 
+repeat-loops follow a similar logic as while-loops, since they can also be used when the user doesn’t know the exact number of times the R code should be repeated. However, repeat-loops are not as popular as while-loops.
+
+### example 0: Writing a repeat-Loop in R (Basics)
+
+```{r}
+x_repeat <- 0                 # Preliminary specification of data object
+
+repeat{                       # Head of repeat-loop
+ 
+  x_repeat <- x_repeat + 1    # Body of repeat-loop
+  print(x_repeat)
+ 
+  if(x_repeat >= 10) {        # Break condition of repeat-loop
+ 
+    break
+  }
+}
 ```
+### example 1: repeat-Loop Through Columns of Data Frame
+
+```{r}
+data4 <- data                   # Replicate example data
+
+i <- 1                          # Create running index
+
+repeat{                         # Start repeat-loop
+ 
+  data4[ , i] <- data4[ , i] + 100
+  i <- i + 1
+ 
+  if(i > 2) {
+    
+    break
+  }
+}
+
+data4
+```
+
+### example 2: Running repeat-Loop Over Data Frame Columns
+
+```{r}
+data(iris)                          # Loading exemplifying data frame
+head(iris)                          # Head of example data
+
+iris3 <- iris                   # Replicate example data
+```
+
+```{r}
+i <- 0                              # Create running index
+
+repeat{                             # Start
+ 
+  i <- i + 1                        # Update running index
+ 
+  if(!is.numeric(iris3[ , i])) {     # Break condition
+ 
+    break
+  }
+ 
+  iris3[ , i] <- iris3[ , i] * 10    # Change data
+}
+head(iris3)
+```
+
+
+### other practice questions
 
 ```{r}
 library(tidyverse)
@@ -165,3 +368,6 @@ mammals <- rename(mammals, genus=Genus, wean_mass="wean mass", max_life="max. li
 str(mammals)
 str(fish)
 ```
+
+## That's it! Take a break and I will see you on Zoom!  
+
