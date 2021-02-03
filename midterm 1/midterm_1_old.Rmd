@@ -1,0 +1,140 @@
+---
+title: "Midterm 1"
+author: "Please Add Your Name Here"
+date: "`r Sys.Date()`"
+output:
+  html_document:
+    theme: spacelab
+    toc: no
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Instructions
+Answer the following questions and complete the exercises in RMarkdown. Please embed all of your code and push your final work to your repository. Your code should be organized, clean, and run free from errors. Remember, you must remove the `#` for any included code chunks to run. Be sure to add your name to the author header above. You may use any resources to answer these questions (including each other), but you may not post questions to Open Stacks or external help sites. There are 15 total questions, each is worth 2 points.  
+
+Make sure to use the formatting conventions of RMarkdown to make your report neat and clean!  
+
+This exam is due by 12:00p on Thursday, January 28.  
+
+## Load the tidyverse
+If you plan to use any other libraries to complete this assignment then you should load them here.
+```{r message=FALSE, warning=FALSE}
+library(tidyverse)
+library(janitor)
+```
+
+## Questions
+1. (3 points) Briefly explain how R, RStudio, and GitHub work together to make work flows in data science transparent and repeatable. What is the advantage of using RMarkdown in this context?  
+
+_RStudio is the GUI that makes makes interacting with R easier and allows for multiple ways to build code (including RMarkdown). GitHub is an online resource where programmers can post their code and make it available to the public. By posting the coding (along with the data) other programmers can see exactly which functions were used and repeat the same analyses._  
+
+2. (3 points) What are the three types of `data structures` that we have discussed? Why are we using data frames for BIS 15L?
+
+_1. Vectors, 2. data matrices, and 3. data frames. We are using data frames because they are capable of storing multiple types of data._
+
+In the midterm 1 folder there is a second folder called `data`. Inside the `data` folder, there is a .csv file called `ElephantsMF`. These data are from Phyllis Lee, Stirling University, and are related to Lee, P., et al. (2013), "Enduring consequences of early experiences: 40-year effects on survival and success among African elephants (Loxodonta africana)," Biology Letters, 9: 20130011. [kaggle](https://www.kaggle.com/mostafaelseidy/elephantsmf).  
+
+3. (3 points) Please load these data as a new object called `elephants`.
+```{r}
+elephants <- readr::read_csv(file="data/ElephantsMF.csv")
+```
+
+4. (3 points) Use the function(s) of your choice to get an idea of the structure of the data. Be sure to show the class of each variable.
+```{r}
+glimpse(elephants)
+```
+
+5. (3 points) Change the names of the variables to lower case and change the class of the variable `sex` to a factor.
+```{r}
+elephants <- janitor::clean_names(elephants)
+elephants$sex <- as.factor(elephants$sex)
+```
+
+6. How many male and female elephants are represented in the data?
+```{r}
+elephants %>% 
+  count(sex)
+```
+
+7. (3 points) What is the average age all elephants in the data?
+```{r}
+elephants %>% 
+  summarize(mean_age=mean(age))
+```
+
+8. (3 points) How does the average age and height of elephants compare by sex?
+```{r}
+elephants %>% 
+  group_by(sex) %>% 
+  summarise(mean_age=mean(age),
+            mean_height=mean(height))
+```
+
+9. (3 points) How does the average height of elephants compare by sex for individuals over 25 years old. Include the number of individuals in this sample as part of your analysis.
+```{r}
+elephants %>% 
+  filter(age>25) %>% 
+  group_by(sex) %>% 
+  summarise(min_height=min(height),
+            max_height=max(height),
+            mean_height=mean(height),
+            n_elephants=n())
+```
+
+For the next series of questions, we will use data from a study on vertebrate community composition and impacts from defaunation in Gabon, Africa.  
+
+Reference: Koerner SE, Poulsen JR, Blanchard EJ, Okouyi J, Clark CJ. Vertebrate community composition and diversity declines along a defaunation gradient radiating from rural villages in Gabon. _Journal of Applied Ecology_. 2016. This paper, along with a description of the variables is included inside the midterm 1 folder.  
+
+10. (3 points) Load `IvindoData_DryadVersion.csv` and use the function(s) of your choice to get an idea of the overall structure. Change the variables `HuntCat` and `LandUse` to factors.
+```{r}
+gabon <- readr::read_csv("data/IvindoData_DryadVersion.csv")
+```
+
+```{r}
+gabon <- gabon %>% 
+  mutate_if(is.character, factor)
+```
+
+```{r}
+glimpse(gabon)
+```
+
+11. (3 points) Among the transects represented in the data, what are the percentages of "High", "Moderate", or "None" hunting intensity (HuntCat) by land use (LandUse)? Hint: try using `tabyl()`
+```{r}
+gabon %>% 
+  tabyl(LandUse, HuntCat)%>% 
+  adorn_percentages() %>%
+  adorn_pct_formatting(digits = 1)
+```
+
+12. (3 points) Among the transect with high hunting intensity, how does the average diversity of birds and mammals compare?
+```{r}
+gabon %>% 
+  filter(HuntCat=="High") %>% 
+  summarise(mean_bird_diversity=mean(Diversity_BirdSpecies),
+            mean_mammal_diversity=mean(Diversity_MammalSpecies),
+            mean_diversity_all=mean(Diversity_AllSpecies),
+            nsamples=n())
+```
+
+13. (3 points) Is the average diversity of birds and mammals for the transects with "None" listed higher or lower than your answer above?
+```{r}
+gabon %>% 
+  filter(HuntCat=="None") %>% 
+  summarise(mean_bird_diversity=mean(Diversity_BirdSpecies),
+            mean_mammal_diversity=mean(Diversity_MammalSpecies),
+            mean_diversity_all=mean(Diversity_AllSpecies),
+            nsamples=n())
+```
+
+14. (3 points) Any of the variables that include `Veg` deal with vegetation. How does the mean of these variables only compare by land use (`LandUse`)? Hint: use the `across` operator.
+```{r}
+gabon %>% 
+  group_by(LandUse) %>% 
+  summarise(across(contains("Veg"), mean))
+```
+
+15. (3 points) Based on your interest, do one exploratory analysis on the `gabon` data of your choice. This analysis needs to include a minimum of two functions in `dplyr.`
