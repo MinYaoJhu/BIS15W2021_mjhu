@@ -80,7 +80,20 @@ fisheries_tidy$catch <- as.numeric(fisheries_tidy$catch)
 3. How many countries are represented in the data? Provide a count and list their names.
 ```{r}
 fisheries_tidy %>% 
+  filter(country=="Western Sahara")
+
+fisheries_tidy %>% 
   summarize(ncountries = n_distinct(country))
+```
+```{r}
+fisheries_tidy %>% 
+  tabyl(country)
+```
+
+
+```{r}
+fisheries_tidy %>% 
+  count(country)
 ```
 
 ```{r}
