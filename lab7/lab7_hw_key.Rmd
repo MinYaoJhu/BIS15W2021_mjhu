@@ -100,6 +100,11 @@ amniota_tidy %>%
   mutate(female_maturity_d2=ifelse(female_maturity_d<0, NA, female_maturity_d))%>% 
   arrange(female_maturity_d2)
 ```
+```{r}
+#amniota_tidy <- amniota %>% 
+#  na_if(-999) %>% 
+#  mutate(female_maturity_d=na_if(female_maturity_d, (-30258.7))) 
+```
 
 **6. Use the package `naniar` to produce a summary, including percentages, of missing data in each column for the `amniota` data.**  
 ```{r}
@@ -128,11 +133,17 @@ amphibio %>%
   select(fos, ter, arb, aqu) %>% 
   summarise_all(~(sum(is.na(.))))
 ```
+```{r}
+amphibio %>% 
+  select(fos, ter, aqu, arb) %>% 
+  naniar::miss_var_summary()
+```
 
 **10. Now that we know how NA's are represented in the `amniota` data, how would you load the data such that the values which represent NA's are automatically converted?**
 ```{r}
 amniota_pre <- 
   readr::read_csv(file = "data/amniota.csv", na = c("-999"))
+amniota_pre %>% summarize(number_nas = sum(is.na(amniota_pre)))
 ```
 
 ## Push your final code to GitHub!
