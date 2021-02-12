@@ -1,10 +1,11 @@
 ---
 title: "Data Visualization: `ggplot` part 3"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
     toc: yes
     toc_float: yes
+    keep_md: yes
   pdf_document:
     toc: yes
 ---
@@ -55,7 +56,17 @@ p
 ```
 
 ```{r}
-p+theme_linedraw()+
+p + theme_classic()+
+  theme(axis.text.x = element_text(angle = 60, hjust=1))+
+  labs(title = "Observations by Taxon in Homerange Data",
+       x = NULL,
+       y= "n",
+       fill= "Trophic Guild")
+```
+
+
+```{r}
+p + theme_linedraw()+
   theme(axis.text.x = element_text(angle = 60, hjust=1))+
   labs(title = "Observations by Taxon in Homerange Data",
        x = NULL,
@@ -68,6 +79,17 @@ There are lots of options to manipulate legends. Have a look [here](http://www.s
 ```{r}
 p+theme_linedraw()+
   theme(legend.position = "bottom",
+        axis.text.x = element_text(angle = 60, hjust=1))+
+  labs(title = "Observations by Taxon in Homerange Data",
+       x = NULL,
+       y= "n",
+       fill= "Trophic Guild")
+```
+> remove legends
+
+```{r}
+p+theme_linedraw()+
+  theme(legend.position = 'none',
         axis.text.x = element_text(angle = 60, hjust=1))+
   labs(title = "Observations by Taxon in Homerange Data",
        x = NULL,
@@ -95,6 +117,15 @@ p+ theme_pander()+
        y= "n",
        fill= "Trophic Guild")
 ```
+```{r}
+p+ theme_map()+
+  theme(legend.position = "bottom",
+        axis.text.x = element_text(angle = 60, hjust=1))+
+  labs(title = "Observations by Taxon in Homerange Data",
+       x = NULL,
+       y= "n",
+       fill= "Trophic Guild")
+```
 
 ## RColorBrewer
 The default colors used by ggplot are often uninspiring. They don't make plots pop out in presentations or publications, and you may want to use a customized palette to make things visually consistent.  
@@ -109,10 +140,20 @@ The thing to notice is that there are three different palettes: 1) sequential, 2
 display.brewer.pal(8,"PRGn")
 ```
 
+```{r}
+display.brewer.pal(8,"RdGy")
+```
+
+
 The [R Color Brewer](http://colorbrewer2.org/#type=sequential&scheme=BuGn&n=3) website is very helpful for getting an idea of the color palettes. To make things easy, use these two guidelines:
 
 +`scale_colour_brewer()` is for points  
 +`scale_fill_brewer()` is for fills  
+
+```{r}
+p
+```
+
 
 Here I chose the `Paired` palette. Take a moment and experiment with other options.
 ```{r}
@@ -125,6 +166,20 @@ p+scale_fill_brewer(palette = "Paired")+
        fill= "Trophic Guild")
 ```
 
+```{r}
+p+scale_fill_brewer(palette = "Set1")+
+  theme(legend.position = "bottom",
+        axis.text.x = element_text(angle = 60, hjust=1))+
+  labs(title = "Observations by Taxon in Homerange Data",
+       x = NULL,
+       y= "n",
+       fill= "Trophic Guild")
+```
+
+```{r}
+display.brewer.all()
+```
+
 ## Manually Setting Colors
 You can also use `paleteer` to build a custom palette for consistency. To access the `paleteer` collection, I add it to a new object.
 ```{r}
@@ -132,8 +187,10 @@ colors <- paletteer::palettes_d_names
 ```
 
 Now we can display the palettes. Assign the palette to `my_palette` and then build this base R bar plot. There are a lot of options; `paleteer` is a collection of popular palettes. I really like the [`ggsci` package] (https://cran.r-project.org/web/packages/ggsci/vignettes/ggsci.html)
+
 ```{r}
 my_palette <- paletteer_d("ggsci::hallmarks_light_cosmic")
+my_palette <- paletteer_d("ggsci::springfield_simpsons")
 ```
 
 ```{r}
@@ -153,42 +210,144 @@ p+scale_fill_manual(values=my_palette)+
 
 ## Adjusting the x and y limits
 There are many options for adjusting the x and y axes. For details, look over examples in the [R Cookbook](http://www.cookbook-r.com/). To adjust limits, we can use the `xlim` and `ylim` commands. When you do this, any data outside the specified ranges are not plotted.
+
 ```{r}
 homerange %>% 
   ggplot(aes(x = log10.mass, y = log10.hra, color = locomotion)) +
-  geom_point() +
+  geom_point(na.rm = T)+
+  annotate("text", label="r^2==0", parse=T, x=6, y=0)
+```
+
+
+```{r}
+homerange %>% 
+  ggplot(aes(x = log10.mass, y = log10.hra, color = locomotion)) +
+  geom_point(na.rm = T) +
   xlim(0, 4) +
   ylim(1, 6)
 ```
 
+
+
 ## Practice
 1. Revisit the relationship between mass and homerange using a scatterplot, but color the points by taxonomic class using a custom color theme.
 ```{r}
+glimpse(homerange)
+```
 
+
+```{r}
+p_hr <- homerange %>% 
+  ggplot(aes(x=log10.mass, y=log10.hra, color=class))+
+  geom_point(size=2)+
+  labs(title = "Mass vs. Homerange",
+       x = "log10.mass",
+       y = "log10.hra") +
+  theme(plot.title = element_text(size = rel(1.5), hjust = 0.5))
+p_hr
+```
+
+```{r}
+p_hr + scale_colour_manual(values=my_palette)
+```
+```{r}
+library("ggsci")
+library("ggplot2")
+library("gridExtra")
+```
+
+
+```{r}
+p_hr + scale_color_aaas()
+```
+
+```{r}
+p_hr + scale_color_npg()
 ```
 
 2. Build bar plots that show the representation by taxonomic class with carnivores and herbivores. Try using a color theme that matches your scatterplot to keep everything consistent.
-```{r}
 
+
+```{r}
+p_tax <- homerange %>% 
+  ggplot(aes(x=trophic.guild, fill=class))+
+  geom_bar(na.rm=T, position="dodge",alpha=0.75, color="black")
+p_tax
 ```
 
+
+```{r}
+p_tax + scale_fill_manual(values=my_palette)+
+  theme(legend.position = "bottom",
+        axis.text.x = element_text(angle = 60, hjust=1))+
+  labs(title = "Observations by Taxon in Homerange Data",
+       x = NULL,
+       y= "n",
+       fill= "Trophic Guild")
+```
+```{r}
+p_tax + scale_fill_aaas()+
+  theme(legend.position = "bottom",
+        axis.text.x = element_text(angle = 60, hjust=1))+
+  labs(title = "Observations by Taxon in Homerange Data",
+       x = NULL,
+       y= "n",
+       fill= "Trophic Guild")
+```
+
+```{r}
+p_tax + scale_fill_npg()+
+  theme(legend.position = "bottom",
+        axis.text.x = element_text(angle = 60, hjust=1))+
+  labs(title = "Observations by Taxon in Homerange Data",
+       x = NULL,
+       y= "n",
+       fill= "Trophic Guild")
+```
+
+
 ## Faceting: `facet_wrap()`
-[Faceting](https://ggplot2-book.org/facet.html) is one of the amazing features of ggplot. It allows us to make multi-panel plots for easy comparison. Here, I am making histograms of log10.mass for every taxon. We read the `~` in the `facet_wrap()` layer as `by`. The bin number doesn't work for every taxon, but it is enough to get the idea.
+
+### [Faceting](https://ggplot2-book.org/facet.html) is one of the amazing features of ggplot. It allows us to make multi-panel plots for easy comparison. Here, I am making histograms of log10.mass for every taxon. We read the `~` in the `facet_wrap()` layer as `by`. The bin number doesn't work for every taxon, but it is enough to get the idea.
 ```{r}
 p2 <- homerange %>% 
   ggplot(aes(x = log10.mass)) +
   geom_density()
+p2
 ```
 
 ```{r}
 p2+ facet_wrap(~taxon)
 ```
 
+```{r}
+p2+ facet_wrap(~class)
+```
+
+```{r}
+homerange %>% 
+  ggplot(aes(x = log10.mass, color = class)) +
+  geom_density()
+```
+
+
+
 ## Faceting: `facet_grid()`
 As you can imagine, there are lots of options for faceting. Another useful facet type is `facet_grid`. 
 ```{r}
 p2+facet_grid(thermoregulation~class)
 ```
+```{r}
+p2+facet_grid(thermoregulation~class)
+```
+
+```{r}
+pdf("homerange.pdf")
+p2
+dev.off
+```
+
+[https://www.datanovia.com/en/blog/how-to-change-ggplot-facet-labels/]
 
 ## That's it, let's take a break!   
 
