@@ -1,11 +1,11 @@
 ---
 title: "Lab 10 Homework"
-author: "Please Add Your Name Here"
+author: "Min-Yao Jhu"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
-    toc: no
+    keep_md: yes
 ---
 
 ```{r setup, include=FALSE}
@@ -74,7 +74,7 @@ deserts %>%
 
 ```{r}
 deserts %>% 
-  ggplot(aes(x = taxa)) + 
+  ggplot(aes(x = taxa, fill = taxa)) + 
   geom_bar() +
   scale_y_log10() +
   labs(title = "Observations by taxa in Deserts Data",
@@ -117,7 +117,7 @@ deserts %>%
 ```{r}
 deserts %>%
   filter(weight!="NA") %>%
-  ggplot(aes(x = species, y = weight)) + 
+  ggplot(aes(x = species, y = weight, fill = species)) + 
   geom_boxplot() +
   coord_flip()+  
   labs(title = "Weight range by species in Deserts Data",
@@ -128,7 +128,7 @@ deserts %>%
 ```{r}
 deserts %>%
   filter(weight!="NA") %>%
-  ggplot(aes(x = species, y = weight)) + 
+  ggplot(aes(x = species, y = weight, fill = species)) + 
   geom_boxplot() +
   coord_flip() +
   scale_y_log10() +
@@ -184,16 +184,6 @@ deserts %>%
   labs(title = "Weight range by species in Deserts Data",
        x = "species name",
        y = "log10 weight")
-```
-
-```{r}
-deserts %>% 
-  ggplot(aes(x = species, y = record_id, color = plot_type)) + 
-  geom_point() +
-  labs(title = "Observations by species in Deserts Data",
-       x = "species",
-       y = "count") +
-  coord_flip()
 ```
 
 7. [Dipodomys merriami](https://en.wikipedia.org/wiki/Merriam's_kangaroo_rat) is the most frequently sampled animal in the study. How have the number of observations of this species changed over the years included in the study?
@@ -325,9 +315,6 @@ deserts2 %>%
 
 10. Make one plot of your choice! Make sure to include at least two of the aesthetics options you have learned.
 
-```{r}
-
-```
 
 ## Push your final code to GitHub!
 Please be sure that you check the `keep md` file in the knit preferences. 
