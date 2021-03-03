@@ -7,41 +7,47 @@ output:
     keep_md: yes
 ---
 
+## Learning Goals
+*At the end of this exercise, you will be able to:*  
+1. know the concept of loops.
+2. understand the three different types of loops
+3. use loops in vectors, matrixes, and data frames.
+4. use loops for plotting.
+5. use loops to combine multiple files.
+
+## Resources and references
+
+- [Loops in R](https://statisticsglobe.com/loops-in-r/)
+
+## Load the libraries
 ```{r message=FALSE, warning=FALSE}
 library("tidyverse")
 ```
 
-
-# A Tutorial on Loops in R
-
-What Are Loops?
-
+## What Are Loops?
 A loop is a programming instruction that repeats until a specific condition is reached.
-
 The loop executes a code block again and again until no further action is required.
-
 Each time the code block within the loop is executed is called an iteration.
 
-
 ## Different Types of Loops
-
 Depending on your specific programming situation, you may need different loop-structures that execute the code blocks within the loop on the basis of different conditions.
 
-The R programming language generally provides three different types of loops: for-loops, while-loops, and repeat-loops. 
+The R programming language generally provides three different types of loops: 
+1. for-loops
+2. while-loops
+3. repeat-loops
 
 ## For-Loops
 
-> for-loops specify a collection of objects (e.g. elements in a vector or list) to which a code block should be applied.
+for-loops specify a collection of objects (e.g. elements in a vector or list) to which a code block should be applied.
 
-### Syntax of for loop
+## Syntax of for loop
 
-```{r}
-#for (variable in vector) {
-#  do something
-#}
-```
+for (variable in vector) {
+  do something
+}
 
-> Using the names above, each iteration of variable takes the value of one of the elements of vector. Here’s one example:
+Using the names above, each iteration of variable takes the value of one of the elements of vector. Here’s one example:
 
 #### example 0: Loop Through Vector in R (Basics)
 
@@ -371,3 +377,4 @@ str(fish)
 
 ## That's it! Take a break and I will see you on Zoom!  
 
+-->[Home](https://jmledford3115.github.io/datascibiol/)
