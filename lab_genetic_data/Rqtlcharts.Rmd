@@ -1,0 +1,39 @@
+---
+title: "R/qtlcharts within R Markdown"
+author: "Min-Yao"
+date: "2021/2/23"
+output: html_document
+---
+
+```{r}
+library(qtl)
+library(qtlcharts)
+data(grav)
+```
+
+```{r}
+summary(grav)
+```
+
+
+```{r}
+grav$pheno <- grav$pheno[,seq(1, nphe(grav), by=5)]
+```
+
+```{r}
+times <- as.numeric(sub("T", "", phenames(grav)))/60
+```
+
+```{r}
+grav <- calc.genoprob(grav, step=1)
+out.hk <- scanone(grav, pheno.col=1:nphe(grav), method="hk")
+```
+
+```{r}
+iplotMap(grav)
+```
+
+```{r}
+iplotCorr(grav$pheno)
+```
+

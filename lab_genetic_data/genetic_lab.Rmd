@@ -1,0 +1,74 @@
+---
+title: "genetic_lab"
+author: "Min-Yao"
+date: "2021/2/17"
+output: html_document
+---
+
+In practice, one would use the function read.cross() to load a data set into R. See the help
+ﬁle (type ?read.cross), look at the sample data sets at https://rqtl.org/sampledata,
+and consider Chapter 2 of Broman and Sen (2009) A Guide to QTL Mapping with R/qtl
+(https://rqtl.org/book).
+
+A data ﬁle for the mapthis data is at https://rqtl.org/tutorials/mapthis.csv.
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+library(qtl)
+library(DataExplorer)
+data(mapthis)
+```
+
+```{r}
+str(mapthis)
+glimpse(mapthis)
+```
+
+```{r}
+summary(mapthis)
+```
+
+```{r}
+plotMissing(mapthis)
+```
+
+```{r}
+plot_missing(mapthis, missing_only = TRUE)
+```
+
+
+```{r}
+ntyped(mapthis)
+```
+
+The function ntyped() provides the numbers of genotyped markers for each individual (or
+the number of genotyped individuals for each marker).
+
+```{r}
+plot(ntyped(mapthis), ylab="No. typed markers", main="No. genotypes by individual")
+```
+
+```{r}
+ntyped(mapthis) %>% 
+  as.data.frame() %>% 
+  rename(genotyped_marker_number=".") %>% 
+  rowid_to_column(var = "individual_number") %>% 
+  ggplot(aes(x=individual_number,y=genotyped_marker_number))+
+  geom_point()
+```
+
+```{r}
+plot(ntyped(mapthis, "mar"), ylab="No. typed individuals", main="No. genotypes by marker")
+```
+
+```{r}
+ntyped(mapthis, "mar")
+```
+
+```{r}
+cg <- comparegeno(mapthis)
+hist(cg[lower.tri(cg)], breaks=seq(0, 1, len=101), xlab="No. matching genotypes")
+rug(cg[lower.tri(cg)])
+```
+
