@@ -25,7 +25,7 @@ library(ggmap)
 ```
 
 **1. We have a satellite collars on a number of different individuals and want to be able to quickly look at all of their recent movements at once. Please load all the data files from `us_individual_collar_data` and use for loop to create plots for all different individuals of the path they move on longitude and latitude.**
-```{r}
+```{r message=FALSE, warning=FALSE}
 data_files <- list.files("data/us_individual_collar_data", full.names = TRUE)
 # only ggplot
 for (i in 1:length(data_files)){
@@ -40,7 +40,7 @@ for (i in 1:length(data_files)){
 ```
 
 **2. Please load all the data files from `us_individual_collar_data` and combine all data into one data frame. Create a summary to show what is the maximum and minimum of recorded data points on longitude and latitude.**
-```{r}
+```{r message=FALSE, warning=FALSE}
 # summary table
 data_list <- lapply(data_files, read_csv)
 (collar_data_all <- bind_rows(data_list))
@@ -52,7 +52,7 @@ collar_data_all %>%
 ```
 
 **3. Use the range of the latitude and longitude from Q2 to build an appropriate bounding box for your map and load a map from `stamen` in a terrain style projection and display the map. Then, build a final map that overlays the recorded path from Q1.**
-```{r}
+```{r message=FALSE, warning=FALSE}
 # on a map
 lat <- c(26.6116, 41.58802)
 long <- c(-122.6017, -106.3343)
