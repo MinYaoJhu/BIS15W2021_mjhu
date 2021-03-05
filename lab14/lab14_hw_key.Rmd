@@ -85,6 +85,12 @@ nind(hyper)    # No. individuals
 nphe(hyper)    # No. phenotypes
 nchr(hyper)    # No. chromosomes
 totmar(hyper)  # Total markers
+```
+> 250 individuals and 2 phenotypes (one of them is ID) are included in this data set.
+
+> 174 gene markers and 20 chromosomes are included in this data set.
+
+```{r}
 nmar(hyper)    # No. markers on each chromosome
 ```
 
@@ -99,7 +105,7 @@ plotMissing(hyper, main="")
 head(hyper$pheno)
 plotMissing(hyper, main="", reorder=1)
 ```
-> The scientists only genotyped the individuals that have the extreme phenotypes (the indivuals with very high blood pressure and very low blood pressure). Therefore, we see all the black lines concentrate in the middle.
+> The scientists only genotyped the individuals that have the extreme phenotypes (the individuals with very high blood pressure and very low blood pressure). Therefore, we see all the black lines concentrate in the middle of the y-axis.
 
 **7. Based on your answer from previous question, you probably noticed that there are gene markers without data. Please use the function `drop.nullmarkers` to remove markers that have no genotype data. After this, make a new summary to show the number of markers on each chromosome. How many gene markers were dropped? Where were the dropped markers located? Please use the data without nullmarkers for the following questions.**
 ```{r}
@@ -119,7 +125,7 @@ summary(out.em)
 max(out.em)
 iplotScanone(out.em)
 ```
-> D4Mit164 has the highest LOD score, which is on chromosome 4.
+> Gene marker D4Mit164, which is on chromosome 4, has the highest LOD score (8.094).
 
 **9. Based on your genome scan results, create a table which only includes those chromosomes with LOD > 1. Creates an interactive chart with LOD curves linked to estimated QTL effects for only those chromosomes with LOD > 1. Find the gene maker with the highest LOD score and describe how does the genotype of this marker influence the individual's phenotype.**
 ```{r}
@@ -127,7 +133,7 @@ summary(out.em, threshold=1)
 iplotScanone(out.em, hyper, chr=c(1, 2, 4, 5, 6, 15))
 ```
 
-> The gene marker with the highest LOD score 8.09 is D4Mit164. The individuals with the homozygous BB genotype have higher blood pressure comparing with the individuals with the heterozygous BA genotype.
+> The gene marker with the highest LOD score is D4Mit164. The individuals with the homozygous BB genotype on D4Mit164 have higher blood pressure comparing with the individuals with the heterozygous BA genotype on D4Mit164.
 
 **10. Please save your interactive chart from Q9 as a html file `hyper_iplotScanone.html` and make sure your upload it to your github repository with your lab14 homework as well.**
 ```{r}
