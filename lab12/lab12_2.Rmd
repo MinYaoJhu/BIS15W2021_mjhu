@@ -2,10 +2,11 @@
 title: "Intro to Spatial Data"
 date: "`r Sys.Date()`"
 output:
-  html_document:
+  html_document: 
     theme: spacelab
     toc: yes
     toc_float: yes
+    keep_md: yes
   pdf_document:
     toc: yes
 ---
@@ -24,15 +25,15 @@ If you completed part 1 of today's lab then you should have the following packag
 
 `devtools` and `ggmap`
 ```{r}
-# install.packages("devtools")
-# library(devtools)
-# devtools::install_github("dkahle/ggmap")
+#install.packages("devtools")
+#library(devtools)
+#devtools::install_github("dkahle/ggmap")
 ```
 
 `albersusa`
 ```{r, message = FALSE}
-# install.packages("albersusa")
-# devtools::install_github("hrbrmstr/albersusa")
+#install.packages("albersusa")
+#devtools::install_github("hrbrmstr/albersusa")
 ```
 
 ## Load the libraries
@@ -76,14 +77,14 @@ Let's get a base map for our bounding box area. We will use the stamen maps beca
 
 ```{r}
 #install.packages("osmdata")
-#library(osmdata)
+library(osmdata)
 sac_map <- get_map(getbb("Sacramento"), maptype = "toner-background")
 ggmap(sac_map)
 ```
 
 ```{r}
-map2 <- get_map(bbox, source = "osm", maptype = "toner")
-ggmap(map2)
+#map2 <- get_map(bbox, source = "osm", maptype = "toner")
+#ggmap(map2)
 ```
 
 ```{r}

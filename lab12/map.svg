@@ -9,9 +9,12 @@
       stroke-linejoin: round;
       stroke-miterlimit: 10.00;
     }
+    .svglite text {
+      white-space: pre;
+    }
   ]]></style>
 </defs>
-<rect width='100%' height='100%' style='stroke: none; fill: #FFFFFF;'/>
+<rect width='100%' height='100%' style='stroke: none; fill: none;'/>
 <defs>
   <clipPath id='cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA='>
     <rect x='0.00' y='0.00' width='504.00' height='360.00' />
@@ -384,6 +387,6 @@
 <circle cx='177.58' cy='119.44' r='1.95' style='stroke-width: 0.71; fill: #000000;' />
 </g>
 <g clip-path='url(#cpMC4wMHw1MDQuMDB8MC4wMHwzNjAuMDA=)'>
-<text x='253.37' y='352.42' text-anchor='middle' style='font-size: 10.00px; font-family: Arial;' textLength='171.85px' lengthAdjust='spacingAndGlyphs'>Figure 1: Distribution of Usofila spiders</text>
+<text x='253.37' y='352.42' text-anchor='middle' style='font-size: 10.00px; font-family: "Arial";' textLength='171.85px' lengthAdjust='spacingAndGlyphs'>Figure 1: Distribution of Usofila spiders</text>
 </g>
 </svg>
