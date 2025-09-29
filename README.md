@@ -30,8 +30,8 @@ Although this repository reflects my role as a TA at the time, my current positi
 I’ve kept the README information intact to preserve the historical context of the course.  
 
 - **Name:** Min-Yao Jhu  
-[LinkedIn](www.linkedin.com/in/min-yao-jhu)
-[Website](https://www.minyaojhu.com/)
+- [LinkedIn](www.linkedin.com/in/min-yao-jhu)
+- [Website](https://www.minyaojhu.com/)
 
 ## Class Links  
 
