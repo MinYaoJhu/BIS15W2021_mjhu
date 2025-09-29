@@ -35,8 +35,8 @@ I’ve kept the README information intact to preserve the historical context of 
 
 ## Class Links  
 
-[BIS 15L Webpage](https://jmledford3115.github.io/datascibiol/)
-[College of Biological Sciences](https://biology.ucdavis.edu/)  
+- [BIS 15L Webpage](https://jmledford3115.github.io/datascibiol/)
+- [College of Biological Sciences](https://biology.ucdavis.edu/)  
 
 ---
 
